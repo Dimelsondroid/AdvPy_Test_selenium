@@ -17,7 +17,7 @@ class TestSelenium:
         except AssertionError:
             return 'Login page Test Failed'
 
-    def enter_correct_username(self, user):
+    def enter_username(self, user):
         try:
             search_username_input = self.driver.find_element(By.ID, 'passp-field-login')
             search_username_input.send_keys(Keys.CONTROL + 'a')
@@ -29,7 +29,7 @@ class TestSelenium:
         except AssertionError:
             return 'Incorrect Username test Passed'
 
-    def enter_correct_password(self, password):
+    def enter_password(self, password):
         try:
             search_pass_input = self.driver.find_element(By.CLASS_NAME, 'Textinput-Control')
             search_pass_input.send_keys(Keys.CONTROL + 'a')
@@ -47,16 +47,20 @@ if __name__ == '__main__':
     correct_password = ''
 
     # Tests for correct data
-    test_success = TestSelenium()
-    print(test_success.get_login_page())
-    time.sleep(2)
-    print(test_success.enter_correct_username('user'))
-    time.sleep(2)
-    print(test_success.enter_correct_username(correct_username))
-    time.sleep(2)
-    print(test_success.enter_correct_password('password'))
-    time.sleep(2)
-    print(test_success.enter_correct_password(correct_password))
-    time.sleep(2)
-    test_success.driver.quit()
+    test = TestSelenium()
+    login_page = test.get_login_page()
+    print(login_page)
+    if login_page == 'Login page Test Failed':
+        test.driver.quit()
+    else:
+        time.sleep(2)
+        print(test.enter_username('user'))
+        time.sleep(2)
+        print(test.enter_username(correct_username))
+        time.sleep(2)
+        print(test.enter_username('password'))
+        time.sleep(2)
+        print(test.enter_username(correct_password))
+        time.sleep(2)
+        test.driver.quit()
 
